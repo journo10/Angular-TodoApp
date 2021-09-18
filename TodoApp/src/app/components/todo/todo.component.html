@@ -1,0 +1,38 @@
+<div class="container mt-3">
+  <div class="col-md-6 mx-auto">
+    <form class="d-flex">
+      <input class="form-control me-sm-2" #todoText (keyup.enter)="addTodo(todoText)" type="text" placeholder="Ara" />
+      <button class="btn btn-success my-2 my-sm-0" (click)="addTodo(todoText)" type="button" >Ekle</button>
+    </form>
+  </div>
+</div>
+
+<div class="container mt-3" *ngIf="todos.length;else temp1">
+    <div class="col-md-6 mx-auto">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">İd</th>
+        <th scope="col">Yapılacaklar</th>
+        <th scope="col">Tarih</th>
+        <th scope="col">Sil</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of todos;let i=index" class="table">
+        <th>{{i+1}}</th>
+        <td>{{t.text}}</td>
+        <td>{{t.createdAt | date:'dd.MM.yyyy-hh:mm:ss'}}</td>
+        <td>
+            <button (click)="removeTodo(t)" class="btn btn-danger">Sil</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<ng-template #temp1>
+    <div class="alert alert-danger mt-3">Yapılacaklar listesinde iş yok <strong>ekleyin.</strong> </div>
+</ng-template>
+
